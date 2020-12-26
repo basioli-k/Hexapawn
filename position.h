@@ -11,7 +11,7 @@ public:
     position(int x, int y);
 
     position operator+(const position& pos);
-
+    bool operator==(const position& pos);
     friend ostream& operator<<(ostream& os, const position& pos);
 
 };

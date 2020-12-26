@@ -10,7 +10,7 @@ player::player(int n, int m, bool isWhite)
     {
         pawns.push_back(position(isWhite * (n - 1), i));
     }
-    maxPawn = pawns[m / 2];
+
     if (isWhite)
     {
         moves = {position(-1, 0), position(-1, -1), position(-1, 1)}; //first move moves the pawn forward
@@ -19,4 +19,14 @@ player::player(int n, int m, bool isWhite)
     {                                                                  //third move moves the pawn diagonally right
         moves = {position(1, 0), position(1, -1), position(1, 1)};
     }
+}
+
+void player::erasePawn(position pos){
+    int i = 0;
+    for(; i < this->pawns.size();++i){
+        if(this->pawns[i] == pos){
+            this->pawns.erase(this->pawns.begin() + i);
+        }
+    }
+
 }

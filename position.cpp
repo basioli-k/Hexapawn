@@ -21,3 +21,7 @@ ostream& operator<<(ostream& os, const position& pos){
     os << pos.i << " " << pos.j;
     return os;
 }
+
+bool position::operator==(const position& pos){
+    return this->i == pos.i && this->j == pos.j;
+}

@@ -9,12 +9,13 @@ using namespace std;
 class player{
 public:
     bool isWhite;
-    vector<position> moves;
+    vector<position> moves;   
     vector<position> pawns;
-    position maxPawn;
 
 
     player(int n, int m, bool isWhite);
+
+    void erasePawn(position pos);
 };
 
 
