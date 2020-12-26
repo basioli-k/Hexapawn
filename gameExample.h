@@ -4,4 +4,6 @@
 
 void gameExampleOne();
 
+void gameExampleTwo();
+
 #endif

@@ -2,7 +2,7 @@
 using namespace std;
 
 int main(){
-    gameExampleOne();
+    gameExampleTwo();
     
 
     return 0;

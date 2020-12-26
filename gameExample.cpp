@@ -5,6 +5,7 @@
 using namespace std;
 #include<vector>
 #include<string>
+#include "minimax.h"
 
 
 void gameExampleOne(){
@@ -19,7 +20,6 @@ void gameExampleOne(){
     helper.createBoard(board,n,m);
 
     helper.printBoard(board);
-    bool isLegal = true;
 
     cout << move(board,white,black,white.pawns[1],white.moves[0]) << endl;   //middle white moves forward
 
@@ -40,4 +40,19 @@ void gameExampleOne(){
     cout << move(board,white,black,white.pawns[0],white.moves[2]) << endl;   //white takes black
     helper.printBoard(board);
 
+}
+
+void gameExampleTwo(){
+    int n = 3,m = 3;
+    helpers helper;
+    //cin >> n >> m;
+
+    player white = player(n,m,true);
+    player black = player(n,m,false);
+
+    vector<string> board;
+    helper.createBoard(board,n,m);
+    minimax mm;
+    cout << "i am here" << endl;
+    cout << "result is "<< mm.minimaxAlg(board,white,black,true,1) << endl;
 }

@@ -12,6 +12,8 @@ public:
     void printPawns(player & player);
 
     void printBoard(vector<string> &board);
+
+    int evaluateBoard(vector<string> &board);
 };
 
 #endif
