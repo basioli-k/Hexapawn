@@ -14,7 +14,7 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
 
     vector<string> bestBoard = board;
     player bestWhite = white, bestBlack = black;
-    int result = 0;
+    int result = INT_MIN;
     bool noLegalMoves = true;
     if(whitePlays){
         for(int i = 0 ; i < white.pawns.size(); ++i){
