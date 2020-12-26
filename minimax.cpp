@@ -41,7 +41,10 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
         
         if(noLegalMoves){
             if(white.pawns.size() > black.pawns.size()) return INT_MAX;
-            else if(white.pawns.size() == black.pawns.size()) return 0;
+            else if(white.pawns.size() == black.pawns.size()){
+                if(whitePlays) return INT_MIN;
+                else return INT_MAX;
+            }
             else return INT_MIN;
         }
     }
@@ -69,7 +72,10 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
         helper.printBoard(bestBoard);
         if(noLegalMoves){
             if(white.pawns.size() > black.pawns.size()) return INT_MAX;
-            else if(white.pawns.size() == black.pawns.size()) return 0;
+            else if(white.pawns.size() == black.pawns.size()){
+                if(whitePlays) return INT_MIN;
+                else return INT_MAX;
+            }
             else return INT_MIN;
         }
 
