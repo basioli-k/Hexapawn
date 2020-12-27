@@ -43,7 +43,7 @@ void gameExampleOne(){
 }
 
 void gameExampleTwo(){
-    int n = 3,m = 3;
+    int n = 5,m = 4;
     helpers helper;
     //cin >> n >> m;
 
