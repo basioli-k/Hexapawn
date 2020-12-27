@@ -11,9 +11,6 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
     }
     if(white.pawns.size()==0 && black.pawns.size()!=0) return INT_MIN;
     if(black.pawns.size() == 0 && white.pawns.size() != 0) return INT_MAX;
-
-    vector<string> bestBoard = board;
-    player bestWhite = white, bestBlack = black;
     int result = INT_MIN;
     bool noLegalMoves = true;
     if(whitePlays){
@@ -28,24 +25,18 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                     int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1);
                     if (res > result){
                         result = res;
-                        bestBoard = currentBoard;
-                        bestWhite = currentWhite;
-                        bestBlack = currentBlack;
                     }
                 }
             }
         }
         
-        cout<< "depth = " << depth << endl;    
-        helper.printBoard(bestBoard);
         
         if(noLegalMoves){
-            if(white.pawns.size() > black.pawns.size()) return INT_MAX;
-            else if(white.pawns.size() == black.pawns.size()){
-                if(whitePlays) return INT_MIN;
-                else return INT_MAX;
-            }
-            else return INT_MIN;
+            
+            if(whitePlays) return INT_MIN;
+            else return INT_MAX;
+            
+            
         }
     }
 
@@ -61,22 +52,15 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                     int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1);
                     if (res < result){
                         result = res;
-                        bestBoard = currentBoard;
-                        bestWhite = currentWhite;
-                        bestBlack = currentBlack;
                     }
                 }
             }
         }
-        cout<< "depth = " << depth << endl;    
-        helper.printBoard(bestBoard);
+     
         if(noLegalMoves){
-            if(white.pawns.size() > black.pawns.size()) return INT_MAX;
-            else if(white.pawns.size() == black.pawns.size()){
-                if(whitePlays) return INT_MIN;
-                else return INT_MAX;
-            }
-            else return INT_MIN;
+            
+            if(whitePlays) return INT_MIN;
+            else return INT_MAX;
         }
 
     }
