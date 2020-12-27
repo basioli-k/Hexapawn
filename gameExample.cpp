@@ -54,5 +54,5 @@ void gameExampleTwo(){
     helper.createBoard(board,n,m);
     minimax mm;
     cout << "i am here" << endl;
-    cout << "result is "<< mm.minimaxAlg(board,white,black,true,1) << endl;
+    cout << "result is "<< mm.minimaxAlg(board,white,black,true,1,INT_MIN,INT_MAX) << endl;
 }
