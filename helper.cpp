@@ -31,8 +31,6 @@ int helpers::evaluateBoard(vector<string> &board){
         if(board[0][i] == 'w') return INT_MAX;        //white wins
         if(board[board.size()-1][i] == 'b') return INT_MIN; //black wins
     }
-    //TODO if there are no legal moves the winner is the player who has more pawns
-    // check this with player.pawns.size()
     
     return 0; //no one is winning for now
 }

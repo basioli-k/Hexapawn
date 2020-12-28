@@ -2,17 +2,24 @@
 #include "helpers.h"
 #include "move.h"
 
+#define MAX_DEPTH 15
+
 helpers helper;
 
-int minimax::minimaxAlg(vector<string> &board, player &white, player &black, bool whitePlays, int depth,int alpha,int beta){
+int h(vector<string> &board, player &white, player &black)
+{
+    int w=white.pawns.size(),b=black.pawns.size();
+    return w-b;   
+}
+int minimax::minimaxAlg(vector<string> &board, player &white, player &black, bool whitePlays, int depth,int alpha,int beta,bool &noLegalMoves){
     
     if(helper.evaluateBoard(board) != 0){
         return helper.evaluateBoard(board);
     }
     if(white.pawns.size()==0 && black.pawns.size()!=0) return INT_MIN;
     if(black.pawns.size() == 0 && white.pawns.size() != 0) return INT_MAX;
-    int result = INT_MIN;
-    bool noLegalMoves = true;
+    vector<string> bestBoard;
+    noLegalMoves=true;
     if(whitePlays){
         int m=alpha;
         for(int i = 0 ; i < white.pawns.size(); ++i){
@@ -22,16 +29,24 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                 player currentWhite = white, currentBlack = black;
 
                 if(move(currentBoard,currentWhite,currentBlack,currentWhite.pawns[i],currentWhite.moves[j])){
+                    if(noLegalMoves && depth==1) bestBoard=currentBoard;
+                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,m,beta,noLegalMoves);
                     noLegalMoves = false;
-                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,m,beta);
-                    if(res>m) m=res;
-                    if (res > result){
-                        result = res;
+                    if(res>m) 
+                    {
+                        if(depth==1) bestBoard=currentBoard;
+                        m=res;
+                    }    
+                    if(m>=beta)
+                    { 
+                        if(depth==1) board=bestBoard;
+                        return beta;
                     }
-                    if(m>=beta) return beta;
                 }
             }
         }
+        if(depth==1) board=bestBoard;
+        if(noLegalMoves) return INT_MIN;
         return m;
     }
 
@@ -44,17 +59,25 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                 player currentWhite = white, currentBlack = black;
 
                 if(move(currentBoard,currentBlack,currentWhite,currentBlack.pawns[i],currentBlack.moves[j])){
+                    if(noLegalMoves && depth==1) bestBoard=currentBoard;
+                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,alpha,n,noLegalMoves);
                     noLegalMoves = false;
-                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,alpha,n);
-                    if(res<n) n=res;
-                    if (res < result){
-                        result = res;
+                    if(res<n)
+                    {   
+                        if(depth==1) bestBoard=currentBoard;
+                        n=res;
                     }
-                    if(n<=alpha) return alpha;
+                    if(n<=alpha)
+                    {
+                        if(depth==1) board=bestBoard;
+                        return alpha;
+                    }
                 }
             }
         }
-     
+        if(depth==1) board=bestBoard;
+        if(noLegalMoves) return INT_MAX;
         return n;
     }
+
 }

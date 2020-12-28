@@ -43,9 +43,9 @@ void gameExampleOne(){
 }
 
 void gameExampleTwo(){
-    int n = 5,m = 4;
+    int n=3,m=3;
     helpers helper;
-    //cin >> n >> m;
+    cin >> n >> m;
 
     player white = player(n,m,true);
     player black = player(n,m,false);
@@ -53,6 +53,11 @@ void gameExampleTwo(){
     vector<string> board;
     helper.createBoard(board,n,m);
     minimax mm;
-    cout << "i am here" << endl;
-    cout << "result is "<< mm.minimaxAlg(board,white,black,true,1,INT_MIN,INT_MAX) << endl;
+    bool noLegalMoves=false, isWhite=true;
+    while(helper.evaluateBoard(board)==0 && !noLegalMoves)
+    {
+        mm.minimaxAlg(board,white,black,isWhite,1,INT_MIN,INT_MAX,noLegalMoves);
+        isWhite^=1;
+        helper.printBoard(board);
+    }
 }
