@@ -30,3 +30,15 @@ void player::erasePawn(position pos){
     }
 
 }
+
+void player::operator=(const player& p){
+    this->isWhite = p.isWhite;
+    this->pawns = p.pawns;
+    this->moves = p.moves;
+    // for(int x = 0 ; x < p.moves.size(); ++x){
+    //     this->moves.push_back(position(p.moves[x].i,p.moves[x].j));
+    // }
+    // for(int x = 0; x < p.pawns.size(); ++x){
+    //     this->pawns.push_back(position(p.pawns[x].i,p.pawns[x].j));
+    // }
+}

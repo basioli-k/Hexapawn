@@ -56,8 +56,10 @@ void gameExampleTwo(){
     bool noLegalMoves=false, isWhite=true;
     while(helper.evaluateBoard(board)==0 && !noLegalMoves)
     {
+        cout << "---" << isWhite << endl;
         mm.minimaxAlg(board,white,black,isWhite,1,INT_MIN,INT_MAX,noLegalMoves);
-        isWhite^=1;
+        isWhite = !isWhite;
         helper.printBoard(board);
+        cout << "nolegalmoves " << noLegalMoves << endl;
     }
 }

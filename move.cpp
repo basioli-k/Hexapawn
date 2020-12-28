@@ -17,6 +17,9 @@ bool move(vector<string> &board, player &player1, player &player2, position &paw
                 player2.erasePawn(position(i,j));
                 std::swap(board[i][j],board[pawn.i][pawn.j]);
                 pawn = pawn + move;
+                cout << "here 1" << endl;
+                helperX.printPawns(player1);
+                helperX.printPawns(player2);
                 return true;
             }
             else if(!player1.isWhite && board[i][j] == 'w'){
@@ -24,6 +27,9 @@ bool move(vector<string> &board, player &player1, player &player2, position &paw
                 player2.erasePawn(position(i,j));
                 std::swap(board[i][j],board[pawn.i][pawn.j]);
                 pawn = pawn + move;
+                cout << "here 2" << endl;
+                helperX.printPawns(player1);
+                helperX.printPawns(player2);
                 return true;
             }
         }

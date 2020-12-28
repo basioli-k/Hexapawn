@@ -16,6 +16,8 @@ public:
     player(int n, int m, bool isWhite);
 
     void erasePawn(position pos);
+
+    void operator=(const player& p);
 };
 
 

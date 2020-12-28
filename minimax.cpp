@@ -19,6 +19,7 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
     if(white.pawns.size()==0 && black.pawns.size()!=0) return INT_MIN;
     if(black.pawns.size() == 0 && white.pawns.size() != 0) return INT_MAX;
     vector<string> bestBoard;
+    player bestWhite = white, bestBlack = black;
     noLegalMoves=true;
     if(whitePlays){
         int m=alpha;
@@ -29,23 +30,40 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                 player currentWhite = white, currentBlack = black;
 
                 if(move(currentBoard,currentWhite,currentBlack,currentWhite.pawns[i],currentWhite.moves[j])){
-                    if(noLegalMoves && depth==1) bestBoard=currentBoard;
+                    cout << "made move " << depth <<" move is " <<white.moves[j] << endl;
+                    if(noLegalMoves && depth==1) {
+                        bestBoard=currentBoard;
+                        bestWhite= currentWhite;
+                        bestBlack = currentBlack;
+                    }
                     int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,m,beta,noLegalMoves);
                     noLegalMoves = false;
                     if(res>m) 
                     {
-                        if(depth==1) bestBoard=currentBoard;
+                        if(depth==1) {
+                            bestBoard=currentBoard;
+                            bestWhite= currentWhite;
+                            bestBlack = currentBlack;
+                        }
                         m=res;
                     }    
                     if(m>=beta)
                     { 
-                        if(depth==1) board=bestBoard;
+                        if(depth==1) {
+                            board=bestBoard;
+                            white = bestWhite;
+                            black = bestBlack;    
+                        }
                         return beta;
                     }
                 }
             }
         }
-        if(depth==1) board=bestBoard;
+        if(depth==1) {
+            board=bestBoard;
+            white = bestWhite;
+            black = bestBlack;  
+        }
         if(noLegalMoves) return INT_MIN;
         return m;
     }
@@ -59,23 +77,40 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                 player currentWhite = white, currentBlack = black;
 
                 if(move(currentBoard,currentBlack,currentWhite,currentBlack.pawns[i],currentBlack.moves[j])){
-                    if(noLegalMoves && depth==1) bestBoard=currentBoard;
+                    cout << "made move " << depth << endl;
+                    if(noLegalMoves && depth==1) {
+                        bestBoard=currentBoard;
+                        bestWhite= currentWhite;
+                        bestBlack = currentBlack;
+                    }
                     int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,alpha,n,noLegalMoves);
                     noLegalMoves = false;
                     if(res<n)
                     {   
-                        if(depth==1) bestBoard=currentBoard;
+                        if(depth==1) {
+                            bestBoard=currentBoard;
+                            bestWhite= currentWhite;
+                            bestBlack = currentBlack;
+                        }
                         n=res;
                     }
                     if(n<=alpha)
                     {
-                        if(depth==1) board=bestBoard;
+                        if(depth==1) {
+                            board=bestBoard;
+                            white = bestWhite;
+                            black = bestBlack;  
+                        }
                         return alpha;
                     }
                 }
             }
         }
-        if(depth==1) board=bestBoard;
+        if(depth==1) {
+            board=bestBoard;
+            white = bestWhite;
+            black = bestBlack;  
+        }
         if(noLegalMoves) return INT_MAX;
         return n;
     }
