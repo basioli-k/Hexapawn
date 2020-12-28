@@ -2,8 +2,6 @@
 #include "helpers.h"
 #include "move.h"
 
-#define MAX_DEPTH 12
-
 helpers helper;
 
 int h(vector<string> &board, player &white, player &black)
@@ -18,7 +16,7 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
     }
     if(white.pawns.size()==0 && black.pawns.size()!=0) return INT_MIN;
     if(black.pawns.size() == 0 && white.pawns.size() != 0) return INT_MAX;
-    if(depth>=MAX_DEPTH) return h(board,white,black);
+    if(depth>=min(10,helper.intlog(3*board[0].size(),1e9))) return h(board,white,black);
     vector<string> bestBoard;
     player bestWhite=player(true),bestBlack=player(false);
     noLegalMoves=true;

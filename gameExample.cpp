@@ -57,7 +57,7 @@ void gameExampleTwo(){
     while(helper.evaluateBoard(board)==0 && !noLegalMoves)
     {
         mm.minimaxAlg(board,white,black,isWhite,1,INT_MIN,INT_MAX,noLegalMoves);
-        isWhite^=1;
+        isWhite = !isWhite;
         helper.printBoard(board);
     }
 }

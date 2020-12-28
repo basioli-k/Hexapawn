@@ -1,6 +1,7 @@
 #include "helpers.h"
 #include <vector>
 #include <string>
+#include <cmath>  
 
 void helpers::createBoard(vector<string> & board, const int &n, const int &m){
     board.push_back(string(m,'b'));
@@ -33,4 +34,8 @@ int helpers::evaluateBoard(vector<string> &board){
     }
     
     return 0; //no one is winning for now
+}
+
+int helpers::intlog(double base, double x) {
+    return (int)(log(x) / log(base));
 }

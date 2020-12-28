@@ -14,6 +14,8 @@ public:
     void printBoard(vector<string> &board);
 
     int evaluateBoard(vector<string> &board);
+
+    int intlog(double base, double x);
 };
 
 #endif
