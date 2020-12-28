@@ -60,4 +60,9 @@ void gameExampleTwo(){
         isWhite = !isWhite;
         helper.printBoard(board);
     }
+    cout << endl;
+    if(isWhite){
+        cout << "Black is the winner." << endl;
+    }
+    else cout << "White is the winner." << endl;
 }
