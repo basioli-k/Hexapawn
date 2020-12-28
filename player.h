@@ -12,7 +12,7 @@ public:
     vector<position> moves;   
     vector<position> pawns;
 
-
+    player(bool isWhite);
     player(int n, int m, bool isWhite);
 
     void erasePawn(position pos);

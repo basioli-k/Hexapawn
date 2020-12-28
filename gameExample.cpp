@@ -7,7 +7,7 @@ using namespace std;
 #include<string>
 #include "minimax.h"
 
-
+/*
 void gameExampleOne(){
     int n = 3,m = 3;
     helpers helper;
@@ -40,7 +40,7 @@ void gameExampleOne(){
     cout << move(board,white,black,white.pawns[0],white.moves[2]) << endl;   //white takes black
     helper.printBoard(board);
 
-}
+}*/
 
 void gameExampleTwo(){
     int n=3,m=3;

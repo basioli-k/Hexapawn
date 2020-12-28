@@ -4,6 +4,11 @@
 //pawns -> array of alive pawns
 //maxPawn -> the pawn with the highest (lowest) y coordinate for white (black)
 
+player::player(bool isWhite)
+{
+    this->isWhite=isWhite;
+}
+
 player::player(int n, int m, bool isWhite)
 {
     for (int i = 0; i < m; ++i)
