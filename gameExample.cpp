@@ -46,6 +46,12 @@ void gameExampleTwo(){
     int n=3,m=3;
     helpers helper;
     cin >> n >> m;
+    int heuristic;
+    cin >> heuristic;
+    while(heuristic<1 || heuristic > 3){
+        cout << "Invalid heuristic, please input number between 1 and 3." << endl;
+        cin >> heuristic;
+    }
 
     player white = player(n,m,true);
     player black = player(n,m,false);
@@ -54,9 +60,10 @@ void gameExampleTwo(){
     helper.createBoard(board,n,m);
     minimax mm;
     bool noLegalMoves=false, isWhite=true;
+    
     while(helper.evaluateBoard(board)==0 && !noLegalMoves)
     {
-        mm.minimaxAlg(board,white,black,isWhite,1,INT_MIN,INT_MAX,noLegalMoves);
+        mm.minimaxAlg(board,white,black,isWhite,1,INT_MIN,INT_MAX,noLegalMoves,heuristic);
         isWhite = !isWhite;
         helper.printBoard(board);
     }

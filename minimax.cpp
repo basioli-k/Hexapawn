@@ -47,14 +47,28 @@ int h3(vector<string> &board, player &white, player &black)
     return (board.size() - 1 - maxBlack) - minWhite;
 }
 
-int minimax::minimaxAlg(vector<string> &board, player &white, player &black, bool whitePlays, int depth,int alpha,int beta,bool &noLegalMoves){
+int minimax::minimaxAlg(vector<string> &board, player &white, player &black, bool whitePlays, int depth,int alpha,int beta,bool &noLegalMoves, int& heuristic){
     
     if(helper.evaluateBoard(board) != 0){
         return helper.evaluateBoard(board);
     }
     if(white.pawns.size()==0 && black.pawns.size()!=0) return INT_MIN;
     if(black.pawns.size() == 0 && white.pawns.size() != 0) return INT_MAX;
-    if(depth>=min(10,helper.intlog(3*board[0].size(),1e9))) return h2(board,white,black);
+    
+    if(depth>=min(10,helper.intlog(3*board[0].size(),1e9))){
+        switch(heuristic){
+            case(1):
+                return h1(board,white,black);
+            case(2):
+                return h2(board,white,black);
+            case(3):
+                return h3(board,white,black);
+            default:
+                cout << "Error, not valid heuristic." << endl;
+                return 0;
+            
+        }
+    } 
     vector<string> bestBoard;
     player bestWhite=player(true),bestBlack=player(false);
     noLegalMoves=true;
@@ -73,7 +87,7 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                         bestBoard=currentBoard;
                         bestBlack=currentBlack;
                     }
-                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,m,beta,noLegalMoves);
+                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,m,beta,noLegalMoves,heuristic);
                     noLegalMoves = false;
                     if(res>m) 
                     {
@@ -123,7 +137,7 @@ int minimax::minimaxAlg(vector<string> &board, player &white, player &black, boo
                         bestBoard=currentBoard;
                         bestBlack=currentBlack;
                     }
-                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,alpha,n,noLegalMoves);
+                    int res = minimaxAlg(currentBoard,currentWhite,currentBlack,!whitePlays,depth+1,alpha,n,noLegalMoves,heuristic);
                     noLegalMoves = false;
                     if(res<n)
                     {   
